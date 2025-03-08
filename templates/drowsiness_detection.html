@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drowsiness Detection - Driver Drowsiness System</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      main {
+        flex: 1;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 40px;
+        background-color: white;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        height: 80px;
+      }
+
+      header .logo img {
+        height: 50px;
+        width: auto;
+      }
+
+      header .title {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+
+      header nav ul {
+        display: flex;
+        list-style: none;
+        gap: 20px;
+        margin: 0;
+        padding: 0;
+      }
+
+      header nav ul li {
+        display: flex;
+        align-items: center;
+      }
+
+      header nav ul li a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      header nav ul li a:hover {
+        color: #007bff;
+      }
+      header nav ul li .logout-btn {
+        background: none; /* Remove background */
+        border: none; /* Remove border */
+        padding: 10px; /* Add some padding to give space around the icon */
+        cursor: pointer; /* Show a pointer cursor on hover */
+        display: inline-flex; /* Align icon horizontally */
+        align-items: center;
+        justify-content: center;
+      }
+
+      header nav ul li .logout-btn svg {
+        width: 24px; /* Set a fixed width for the icon */
+        height: 24px; /* Set a fixed height for the icon */
+        fill: #333; /* Set the color for the icon */
+        transition: fill 0.3s ease; /* Smooth color change */
+      }
+
+      header nav ul li .logout-btn svg:hover {
+        fill: #007bff; /* Change the color of the icon on hover */
+      }
+
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 60px 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .hero-text {
+        max-width: 600px;
+      }
+
+      .hero-text h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        line-height: 1.2;
+      }
+
+      .hero-text p {
+        font-size: 1rem;
+        margin-bottom: 30px;
+        color: #666;
+        line-height: 1.6;
+      }
+
+      .hero-text form {
+        display: inline-block;
+        margin: 5px;
+      }
+
+      .hero-text button {
+        padding: 15px 30px;
+        font-size: 1rem;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .hero-text button:hover {
+        background-color: #218838;
+      }
+
+      .hero-text .stop-btn {
+        background-color: #dc3545;
+      }
+
+      .hero-text .stop-btn:hover {
+        background-color: #c82333;
+      }
+
+      .video-feed {
+        margin-top: 20px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        overflow: hidden;
+        width: 640px;
+        height: 480px;
+      }
+
+      .video-feed img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      footer {
+        text-align: center;
+        padding: 15px 0;
+        background: #222;
+        color: #fff;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <a href="{{ url_for('frontend') }}">
+          <img
+            src="{{ url_for('static', filename='img/company.png') }}"
+            alt="Logo"
+          />
+        </a>
+      </div>
+      <div class="title">
+        <h1>Driver Drowsiness</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('about') }}">About</a></li>
+          <li><a href="{{ url_for('history') }}">Your History</a></li>
+          <li>
+            <form action="{{ url_for('logout') }}" method="POST">
+              <button type="submit" class="logout-btn" title="Logout">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                  <path
+                    d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"
+                  />
+                </svg>
+              </button>
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="hero-text">
+          <h1>Drowsiness Detection Service</h1>
+          <h3>Welcome, {{ session['name'] }}</h3>
+          <p>Your License Number is: {{ session['license_number'] }}</p>
+          <p>
+            Drowsiness refers to feeling more sleepy than normal during the day.
+            People who are drowsy may fall asleep when they do not want to or at
+            times which can lead to safety concerns.
+          </p>
+          <form action="/start-detection" method="POST">
+            <button type="submit">Start Detection</button>
+          </form>
+          <form action="/stop-detection" method="POST">
+            <button type="submit" class="stop-btn">Stop Detection</button>
+          </form>
+          <div class="video-feed">
+            <img src="{{ url_for('video_feed') }}" alt="Live Camera Feed" />
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2025 Driver Drowsiness System. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

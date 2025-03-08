@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drowsiness History</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+
+      .container {
+        background: #ffffff;
+        padding: 30px;
+        height: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        overflow: scroll;
+        }
+        .container::-webkit-scrollbar {
+             display: none;
+        }
+
+      h1 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 16px;
+        color: #555;
+      }
+
+      .log-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .log-item {
+        background: #e9ecef;
+        margin: 10px 0;
+        padding: 15px;
+        border-radius: 5px;
+        text-align: left;
+      }
+
+      .log-item strong {
+        color: #218838;
+      }
+
+      .back-btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .back-btn:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>History of Your Drowsiness</h1>
+      <p>Hello, {{ session["name"] }}</p>
+      <p>License Number: {{ session["license_number"] }}</p>
+      <p>
+        The number of your Drowsiness Count is <strong> {{
+        timestamp_count }}</strong></strong>
+      </p>
+      {% if logs %}
+      <ul class="log-list">
+        {% for log in logs %}
+        <li class="log-item">
+          <strong>Date:</strong> {{ log.time_log.strftime('%Y-%m-%d') }}<br />
+          <strong>Time:</strong> {{ log.time_log.strftime('%I:%M %p') }}<br />
+          <strong>Day:</strong> {{ log.time_log.strftime('%A') }}
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No logs found for this license number.</p>
+      {% endif %}
+      <a href="/drowsiness_detection" class="back-btn">Back to Dashboard</a>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,166 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Focus - Registration</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        position: relative;
+      }
+
+      .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("/static/img/back.png");
+        background-size: cover;
+        background-position: center;
+        filter: blur(5px);
+        z-index: -1;
+      }
+
+      .container {
+        background: #ffffff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+        z-index: 3;
+        position: relative;
+        width: 90%;
+        max-width: 500px;
+        padding: 40px;
+        text-align: center;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        background: transparent;
+        border: none;
+        color: #333;
+        cursor: pointer;
+      }
+
+      .close-btn:hover {
+        color: red;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: 24px;
+        color: #333;
+      }
+
+      p {
+        margin: 0 0 20px;
+        color: #555;
+      }
+
+      label {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 8px;
+        color: #555;
+        text-align: left;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      input:focus {
+        border-color: #6c63ff;
+        outline: none;
+        box-shadow: 0 0 4px rgba(108, 99, 255, 0.2);
+      }
+
+      .button {
+        width: 100%;
+        padding: 10px;
+        background-color: #218838;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .button:hover {
+        background-color: #1e7e34;
+      }
+
+      .login-link {
+        margin-top: 15px;
+        font-size: 14px;
+        color: #666;
+      }
+
+      .login-link a {
+        color: #007bff;
+        text-decoration: none;
+      }
+
+      .login-link a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="background"></div>
+
+    <div class="container">
+      <button class="close-btn" onclick="window.location.href='/'">×</button>
+
+      <h1>Sign Up</h1>
+      <p>Register your account</p>
+
+      <form method="POST" action="/signup">
+        <label for="username">Name</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter your name"
+          required
+        />
+
+        <label for="license">Enter your driver license number (Nepal)</label>
+        <input
+          type="text"
+          id="license"
+          name="license"
+          placeholder="XX-XX-XXXXXXXX"
+          pattern="\d{2}-\d{2}-\d{8}"
+          title="Format must be XX-XX-XXXXXXXX (e.g., 12-34-56789012)"
+          required
+        />
+
+        <button type="submit" class="button">Sign Up</button>
+      </form>
+
+      <p class="login-link">
+        Already have an account? <a href="/login">Login</a>
+      </p>
+    </div>
+  </body>
+</html>

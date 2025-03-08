@@ -1,0 +1,9 @@
+CREATE DATABASE IF NOT EXISTS drowsiness_monitor;
+USE drowsiness_monitor;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    license_number VARCHAR(20) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
